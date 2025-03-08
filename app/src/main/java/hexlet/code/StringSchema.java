@@ -1,12 +1,11 @@
 package hexlet.code;
 
-public class StringSchema {
-    private boolean notNullAndEmpty;
+public class StringSchema extends BaseSchema<String> {
     private int minLength;
     private String substring;
 
     public StringSchema required() {
-        this.notNullAndEmpty = true;
+        setRequired();
         return this;
     }
 
@@ -20,19 +19,17 @@ public class StringSchema {
         return this;
     }
 
+    @Override
     public boolean isValid(String sentence) {
-        if (sentence == null) {
-            return !notNullAndEmpty;
-        }
-        if (notNullAndEmpty && sentence.isEmpty()) {
+        if (checkRequired() && (sentence == null || sentence.isEmpty())) {
             return false;
+        }
+        if (sentence == null) {
+            return true;
         }
         if (minLength > 0 && sentence.length() < minLength) {
             return false;
         }
-        if (substring != null && !sentence.contains(substring)) {
-            return false;
-        }
-        return true;
+        return substring == null || sentence.contains(substring);
     }
 }

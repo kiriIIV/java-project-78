@@ -12,4 +12,11 @@ public class ValidatorTest {
 
         assertTrue(v.string() instanceof StringSchema);
     }
+
+    @Test
+    public void testNumberSchema() {
+        var v = new Validator();
+
+        assertTrue(v.number() instanceof NumberSchema);
+    }
 }
