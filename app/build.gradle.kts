@@ -26,5 +26,5 @@ tasks.test {
 tasks.jacocoTestReport { reports { xml.required.set(true) } }
 
 application {
-    mainClass.set("hexlet.code.App")
+    mainClass.set("hexlet.code.Validator")
 }
