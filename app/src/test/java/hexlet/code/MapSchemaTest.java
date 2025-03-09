@@ -1,5 +1,7 @@
 package hexlet.code;
 
+import hexlet.code.schemas.BaseSchema;
+import hexlet.code.schemas.MapSchema;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -140,6 +142,19 @@ public class MapSchemaTest {
 
     @Test
     public void test11() {
+        Map<Integer, BaseSchema<Integer>> schemas = new HashMap<>();
+        schemas.put(1, v.number().positive().required().range(1, 5));
+        schemas.put(2, v.number().required());
+        schema.shape(schemas);
+        Map<Integer, Integer> numbers = new HashMap<>();
+        numbers.put(1, 5);
+        numbers.put(3, 56);
+
+        assertFalse(schema.isValid(numbers));
+    }
+
+    @Test
+    public void test12() {
         Map<Integer, BaseSchema<Map<?, ?>>> schemas = new HashMap<>();
         schemas.put(1, v.map().required().sizeof(2));
         schemas.put(2, v.map().required());
@@ -152,7 +167,7 @@ public class MapSchemaTest {
     }
 
     @Test
-    public void test12() {
+    public void test13() {
         Map<Integer, BaseSchema<Map<?, ?>>> schemas = new HashMap<>();
         schemas.put(1, v.map().required().sizeof(2));
         schemas.put(2, v.map().required());
