@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class NumberSchemaTest {
@@ -54,5 +55,10 @@ public class NumberSchemaTest {
     public void test5() {
         schema.positive().range(-10, -5);
         assertFalse(schema.isValid(-7));
+    }
+
+    @Test
+    public void test6() {
+        assertThrows(IllegalArgumentException.class, () -> schema.range(7, 5));
     }
 }
