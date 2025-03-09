@@ -1,7 +1,7 @@
 package hexlet.code;
 
 public abstract class BaseSchema<T> {
-    private boolean required;
+    private boolean required = false;
 
     public void setRequired() {
         this.required = true;

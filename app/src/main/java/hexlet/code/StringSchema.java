@@ -1,8 +1,8 @@
 package hexlet.code;
 
 public class StringSchema extends BaseSchema<String> {
-    private int minLength;
-    private String substring;
+    private Integer minLength = null;
+    private String substring = null;
 
     public StringSchema required() {
         setRequired();
@@ -27,7 +27,7 @@ public class StringSchema extends BaseSchema<String> {
         if (sentence == null) {
             return true;
         }
-        if (minLength > 0 && sentence.length() < minLength) {
+        if (minLength != null && sentence.length() < minLength) {
             return false;
         }
         return substring == null || sentence.contains(substring);

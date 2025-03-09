@@ -1,9 +1,9 @@
 package hexlet.code;
 
 public class NumberSchema extends BaseSchema<Integer> {
-    private boolean isPositive;
-    private Integer leftRange;
-    private Integer rightRange;
+    private boolean isPositive = false;
+    private Integer leftRange = null;
+    private Integer rightRange = null;
 
     public NumberSchema required() {
         setRequired();
@@ -16,6 +16,9 @@ public class NumberSchema extends BaseSchema<Integer> {
     }
 
     public NumberSchema range(int left, int right) {
+        if (left > right) {
+            throw new IllegalArgumentException("Uncorrect range!");
+        }
         this.leftRange = left;
         this.rightRange = right;
         return this;
