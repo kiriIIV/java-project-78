@@ -19,9 +19,7 @@ public class MapSchema extends BaseSchema<Map<?, ?>> {
 
     public <K, T> MapSchema shape(Map<K, BaseSchema<T>> newSchemas) {
         this.schemas = new HashMap<>();
-        for (Map.Entry<K, BaseSchema<T>> entry : newSchemas.entrySet()) {
-            this.schemas.put(entry.getKey(), entry.getValue());
-        }
+        this.schemas.putAll(newSchemas);
         return this;
     }
 
