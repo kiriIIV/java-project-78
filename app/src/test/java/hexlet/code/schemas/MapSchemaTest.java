@@ -1,7 +1,6 @@
-package hexlet.code;
+package hexlet.code.schemas;
 
-import hexlet.code.schemas.BaseSchema;
-import hexlet.code.schemas.MapSchema;
+import hexlet.code.Validator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +14,7 @@ public class MapSchemaTest {
     private Validator v;
     private MapSchema schema;
     @BeforeEach
-    public void beforeEach() {
+    public final void beforeEach() {
         v = new Validator();
         schema = v.map();
     }

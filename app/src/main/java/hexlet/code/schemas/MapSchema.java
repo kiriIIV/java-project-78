@@ -7,17 +7,17 @@ public class MapSchema extends BaseSchema<Map<?, ?>> {
     private Integer sizeOfMap = null;
     private Map<Object, BaseSchema<?>> schemas;
 
-    public MapSchema required() {
+    public final MapSchema required() {
         setRequired();
         return this;
     }
 
-    public MapSchema sizeof(int size) {
+    public final MapSchema sizeof(int size) {
         this.sizeOfMap = size;
         return this;
     }
 
-    public <K, T> MapSchema shape(Map<K, BaseSchema<T>> newSchemas) {
+    public final <K, T> MapSchema shape(Map<K, BaseSchema<T>> newSchemas) {
         this.schemas = new HashMap<>();
         this.schemas.putAll(newSchemas);
         return this;
@@ -43,7 +43,7 @@ public class MapSchema extends BaseSchema<Map<?, ?>> {
     }
 
     @Override
-    public boolean isValid(Map<?, ?> someValue) {
+    public final boolean isValid(Map<?, ?> someValue) {
         if (checkRequired() && someValue == null) {
             return false;
         }

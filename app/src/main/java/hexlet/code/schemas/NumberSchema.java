@@ -5,17 +5,17 @@ public class NumberSchema extends BaseSchema<Integer> {
     private Integer leftRange = null;
     private Integer rightRange = null;
 
-    public NumberSchema required() {
+    public final NumberSchema required() {
         setRequired();
         return this;
     }
 
-    public NumberSchema positive() {
+    public final NumberSchema positive() {
         this.isPositive = true;
         return this;
     }
 
-    public NumberSchema range(int left, int right) {
+    public final NumberSchema range(int left, int right) {
         if (left > right) {
             throw new IllegalArgumentException("Uncorrect range!");
         }
@@ -25,7 +25,7 @@ public class NumberSchema extends BaseSchema<Integer> {
     }
 
     @Override
-    public boolean isValid(Integer number) {
+    public final boolean isValid(Integer number) {
         if (checkRequired() && number == null) {
             return false;
         }
