@@ -1,35 +1,27 @@
 package hexlet.code.schemas;
 
+import java.util.function.Predicate;
+
 public class StringSchema extends BaseSchema<String> {
-    private Integer minLength = null;
-    private String substring = null;
+    private Predicate<String> minLengthPredicate;
 
     public final StringSchema required() {
         setRequired();
+        predicates.add(sentence -> sentence != null && !sentence.isEmpty());
         return this;
     }
 
     public final StringSchema minLength(int length) {
-        this.minLength = length;
+        if (minLengthPredicate != null) {
+            predicates.remove(minLengthPredicate);
+        }
+        minLengthPredicate = str -> str == null || str.length() >= length;
+        predicates.add(minLengthPredicate);
         return this;
     }
 
     public final StringSchema contains(String word) {
-        this.substring = word;
+        predicates.add(sentence -> sentence == null || sentence.contains(word));
         return this;
-    }
-
-    @Override
-    public final boolean isValid(String sentence) {
-        if (checkRequired() && (sentence == null || sentence.isEmpty())) {
-            return false;
-        }
-        if (sentence == null) {
-            return true;
-        }
-        if (minLength != null && sentence.length() < minLength) {
-            return false;
-        }
-        return substring == null || sentence.contains(substring);
     }
 }

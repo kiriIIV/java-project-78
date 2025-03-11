@@ -1,7 +1,6 @@
 plugins {
     java
     id ("com.github.ben-manes.versions") version "0.52.0"
-    application
     checkstyle
     jacoco
 }
@@ -24,7 +23,3 @@ tasks.test {
 }
 
 tasks.jacocoTestReport { reports { xml.required.set(true) } }
-
-application {
-    mainClass.set("hexlet.code.Validator")
-}

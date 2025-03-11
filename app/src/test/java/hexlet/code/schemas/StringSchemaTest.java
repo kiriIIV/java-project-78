@@ -40,18 +40,41 @@ public class StringSchemaTest {
     public void test3() {
         schema.contains("wh");
         StringSchema schema1 = v.string();
+
         assertTrue(schema1.minLength(10).minLength(4).isValid("House"));
     }
 
     @Test
     public void test4() {
         schema.required().minLength(5);
+
         assertFalse(schema.isValid("cat"));
     }
 
     @Test
     public void test5() {
         schema.minLength(5).contains("123");
+
         assertTrue(schema.isValid(null));
+    }
+
+    @Test
+    public void test6() {
+        schema.minLength(5).contains("cat");
+
+        assertTrue(schema.isValid(null));
+        assertTrue(schema.isValid("catAndDog"));
+        assertFalse(schema.isValid("cat"));
+        assertFalse(schema.isValid("house"));
+    }
+
+    @Test
+    public void test7() {
+        schema.required().minLength(5).contains("c");
+
+        assertTrue(schema.isValid("child"));
+        assertFalse(schema.isValid("Cat"));
+        assertFalse(schema.isValid("house"));
+        assertFalse(schema.isValid(null));
     }
 }
