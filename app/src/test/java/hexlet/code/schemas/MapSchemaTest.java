@@ -31,7 +31,7 @@ public class MapSchemaTest {
 
     @Test
     public void test2() {
-        schema.required().sizeof(2);
+        schema.required().sizeof(1).sizeof(2);
         HashMap<String, String> data = new HashMap<>();
         data.put("key1", "value1");
 

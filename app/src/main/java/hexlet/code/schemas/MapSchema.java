@@ -9,7 +9,6 @@ public class MapSchema extends BaseSchema<Map<?, ?>> {
     private Predicate<Map<?, ?>> predicateOfSize;
 
     public final MapSchema required() {
-        setRequired();
         predicates.add(map -> map != null);
         return this;
     }

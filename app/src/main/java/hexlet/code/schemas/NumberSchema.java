@@ -6,7 +6,6 @@ public class NumberSchema extends BaseSchema<Integer> {
     private Predicate<Integer> rangePredicate;
 
     public final NumberSchema required() {
-        setRequired();
         predicates.add(number -> number != null);
         return this;
     }

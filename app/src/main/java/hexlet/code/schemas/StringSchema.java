@@ -6,7 +6,6 @@ public class StringSchema extends BaseSchema<String> {
     private Predicate<String> minLengthPredicate;
 
     public final StringSchema required() {
-        setRequired();
         predicates.add(sentence -> sentence != null && !sentence.isEmpty());
         return this;
     }

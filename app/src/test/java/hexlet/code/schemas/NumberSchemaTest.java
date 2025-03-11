@@ -67,4 +67,14 @@ public class NumberSchemaTest {
     public void test6() {
         assertThrows(IllegalArgumentException.class, () -> schema.range(7, 5));
     }
+
+    @Test
+    public void test7() {
+        schema.range(1, 2).range(5, 10);
+
+        assertTrue(schema.isValid(7));
+        assertTrue(schema.isValid(5));
+        assertTrue(schema.isValid(10));
+        assertFalse(schema.isValid(2));
+    }
 }
