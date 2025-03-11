@@ -17,7 +17,7 @@ public class BaseSchema<T> {
     }
 
 
-    public boolean isValid(T someValue) {
+    public final boolean isValid(T someValue) {
         Predicate<T> result = value -> true;
         for (var pr : predicates) {
             result = result.and(pr);
