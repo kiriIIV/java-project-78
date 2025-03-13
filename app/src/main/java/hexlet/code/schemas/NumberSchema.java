@@ -5,9 +5,8 @@ import java.util.function.Predicate;
 public class NumberSchema extends BaseSchema<Integer> {
     private Predicate<Integer> rangePredicate;
 
-    @Override
     public final NumberSchema required() {
-        super.required();
+        isRequired();
         return this;
     }
 

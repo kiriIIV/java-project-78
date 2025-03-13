@@ -5,9 +5,8 @@ import java.util.function.Predicate;
 public class StringSchema extends BaseSchema<String> {
     private Predicate<String> minLengthPredicate;
 
-    @Override
     public final StringSchema required() {
-        super.required();
+        isRequired();
         addPredicate(str -> !str.isEmpty());
         return this;
     }

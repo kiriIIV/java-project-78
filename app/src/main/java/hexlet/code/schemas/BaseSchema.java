@@ -8,10 +8,9 @@ public class BaseSchema<T> {
     protected List<Predicate<T>> predicates = new ArrayList<>();
     private boolean isRequired = false;
 
-    public BaseSchema<T> required() {
+    public final void isRequired() {
         isRequired = true;
         predicates.add(value -> value != null);
-        return this;
     }
 
     public final void addPredicate(Predicate<T> pr) {

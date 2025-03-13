@@ -8,9 +8,8 @@ public class MapSchema extends BaseSchema<Map<?, ?>> {
     private Map<Object, BaseSchema<?>> schemas;
     private Predicate<Map<?, ?>> predicateOfSize;
 
-    @Override
     public final MapSchema required() {
-        super.required();
+        isRequired();
         return this;
     }
 
