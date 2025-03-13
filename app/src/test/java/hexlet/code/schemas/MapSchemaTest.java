@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MapSchemaTest {
@@ -176,5 +177,10 @@ public class MapSchemaTest {
         map.put(2, null);
 
         assertFalse(schema.isValid(map));
+    }
+
+    @Test
+    public void test14() {
+        assertThrows(IllegalArgumentException.class, () -> schema.sizeof(-5));
     }
 }

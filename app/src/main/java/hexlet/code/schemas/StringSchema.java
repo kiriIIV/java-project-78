@@ -5,22 +5,24 @@ import java.util.function.Predicate;
 public class StringSchema extends BaseSchema<String> {
     private Predicate<String> minLengthPredicate;
 
+    @Override
     public final StringSchema required() {
-        predicates.add(sentence -> sentence != null && !sentence.isEmpty());
+        super.required();
+        addPredicate(str -> !str.isEmpty());
         return this;
     }
 
     public final StringSchema minLength(int length) {
         if (minLengthPredicate != null) {
-            predicates.remove(minLengthPredicate);
+            deletePredicate(minLengthPredicate);
         }
         minLengthPredicate = str -> str == null || str.length() >= length;
-        predicates.add(minLengthPredicate);
+        addPredicate(minLengthPredicate);
         return this;
     }
 
     public final StringSchema contains(String word) {
-        predicates.add(sentence -> sentence == null || sentence.contains(word));
+        addPredicate(sentence -> sentence == null || sentence.contains(word));
         return this;
     }
 }

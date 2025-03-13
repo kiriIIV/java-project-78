@@ -8,34 +8,38 @@ public class MapSchema extends BaseSchema<Map<?, ?>> {
     private Map<Object, BaseSchema<?>> schemas;
     private Predicate<Map<?, ?>> predicateOfSize;
 
+    @Override
     public final MapSchema required() {
-        predicates.add(map -> map != null);
+        super.required();
         return this;
     }
 
     public final MapSchema sizeof(int size) {
+        if (size < 0) {
+            throw new IllegalArgumentException("Incorrect size");
+        }
         if (predicateOfSize != null) {
-            predicates.remove(predicateOfSize);
+            deletePredicate(predicateOfSize);
         }
         predicateOfSize = map -> map == null || map.size() == size;
-        predicates.add(predicateOfSize);
+        addPredicate(predicateOfSize);
         return this;
     }
 
     public final <K, T> MapSchema shape(Map<K, BaseSchema<T>> newSchemas) {
         this.schemas = new HashMap<>();
         this.schemas.putAll(newSchemas);
-        predicates.add(map -> {
+        addPredicate(map -> {
             if (schemas == null) {
                 return true;
             }
             for (var key : schemas.keySet()) {
                 if (!map.containsKey(key)) {
-                    return false; // Если ключа нет, сразу false
+                    return false;
                 }
                 BaseSchema<Object> schema = (BaseSchema<Object>) schemas.get(key);
                 if (schema == null || !schema.isValid(map.get(key))) {
-                    return false; // Если значение не проходит валидацию
+                    return false;
                 }
             }
             return true;

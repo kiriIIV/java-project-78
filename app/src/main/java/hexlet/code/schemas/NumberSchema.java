@@ -5,13 +5,14 @@ import java.util.function.Predicate;
 public class NumberSchema extends BaseSchema<Integer> {
     private Predicate<Integer> rangePredicate;
 
+    @Override
     public final NumberSchema required() {
-        predicates.add(number -> number != null);
+        super.required();
         return this;
     }
 
     public final NumberSchema positive() {
-        predicates.add(number -> number == null || number > 0);
+        addPredicate(number -> number == null || number > 0);
         return this;
     }
 
@@ -20,10 +21,10 @@ public class NumberSchema extends BaseSchema<Integer> {
             throw new IllegalArgumentException("Incorrect range!");
         }
         if (rangePredicate != null) {
-            predicates.remove(rangePredicate);
+            deletePredicate(rangePredicate);
         }
         rangePredicate = number -> number == null || (number >= left && number <= right);
-        predicates.add(rangePredicate);
+        addPredicate(rangePredicate);
         return this;
     }
 }
